@@ -8,3 +8,5 @@ Run this script with the following command:
 Or add it to your crontable:
 
     crontab -e
+    
+Don't forget to change your user/pass in the server.js file
