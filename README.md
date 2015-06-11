@@ -1,7 +1,10 @@
 Grab a book a day for free from Packt Pub, https://www.packtpub.com/packt/offers/free-learning.
 
+Install this script in the cloned directory using the following command:
 
-Run this script with the following command:
+    npm install
+
+After that run the script with the following command:
 
     watch -n 5000 --differences node server.js
 
