@@ -1,8 +1,10 @@
+require('dotenv').load();
+
 var request = require('request');
 var cheerio = require('cheerio');
 var loginDetails = {
-    email: "xxxxx@xxxx.com",
-    password: "xxxxxxxx",
+    email: process.env.PACKT_EMAIL,
+    password: process.env.PACKT_PASSWORD,
     op: "Login",
     form_id: "packt_user_login_form",
     form_build_id: ""

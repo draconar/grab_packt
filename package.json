@@ -7,6 +7,7 @@
   "author": "",
   "dependencies": {
     "cheerio": "latest",
+    "dotenv": "^1.1.0",
     "request": "latest"
   }
 }
