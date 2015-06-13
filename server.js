@@ -12,6 +12,7 @@ var loginDetails = {
     form_build_id: ""
 };
 var url = 'https://www.packtpub.com/packt/offers/free-learning';
+var loginError = 'Sorry, you entered an invalid email address and password combination.';
 var getBookUrl;
 
 //we need cookies for that, therefore let's turn JAR on
@@ -21,7 +22,7 @@ request = request.defaults({
 
 request(url, function(err, res, body) {
     if (err) {
-        callback.call(null, new Error('Request failed'));
+        console.error('Request failed');
         return;
     }
 
@@ -41,13 +42,19 @@ request(url, function(err, res, body) {
         body: require('querystring').stringify(loginDetails)
     }, function(err, res, body) {
         if (err) {
-            callback.call(null, new Error('Login failed'));
+            console.error('Login failed');
             return;
         };
+        var $ = cheerio.load(body);
+        var loginFailed = $("div.error:contains('"+loginError+"')");
+        if (loginFailed.length) {
+            console.error('Login failed, please check your email address and password');
+            return;
+        }
 
         request('https://www.packtpub.com' + getBookUrl, function(err, res, body) {
             if (err) {
-                callback.call(null, new Error('Request Error'));
+                console.error('Request Error');
                 return;
             }
 
@@ -56,7 +63,5 @@ request(url, function(err, res, body) {
             console.log('https://www.packtpub.com' + getBookUrl);
             console.log(Math.random(10))
         });
-
     });
-
 });
