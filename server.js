@@ -14,6 +14,7 @@ var loginDetails = {
 var url = 'https://www.packtpub.com/packt/offers/free-learning';
 var loginError = 'Sorry, you entered an invalid email address and password combination.';
 var getBookUrl;
+var bookTitle;
 
 //we need cookies for that, therefore let's turn JAR on
 request = request.defaults({
@@ -28,6 +29,7 @@ request(url, function(err, res, body) {
 
     var $ = cheerio.load(body);
     getBookUrl = $("a.twelve-days-claim").attr("href");
+    bookTitle = $(".dotd-title").text().trim();
     var newFormId = $("input[type='hidden'][id^=form][value^=form]").val();
 
     if (newFormId) {
@@ -60,8 +62,8 @@ request(url, function(err, res, body) {
 
             var $ = cheerio.load(body);
 
+            console.log(bookTitle);
             console.log('https://www.packtpub.com' + getBookUrl);
-            console.log(Math.random(10))
         });
     });
 });
