@@ -21,9 +21,11 @@ request = request.defaults({
     jar: true
 });
 
+console.log('----------- Packt Grab Started -----------');
 request(url, function(err, res, body) {
     if (err) {
         console.error('Request failed');
+        console.log('----------- Packt Grab Done --------------');
         return;
     }
 
@@ -45,25 +47,30 @@ request(url, function(err, res, body) {
     }, function(err, res, body) {
         if (err) {
             console.error('Login failed');
+            console.log('----------- Packt Grab Done --------------');
             return;
         };
         var $ = cheerio.load(body);
         var loginFailed = $("div.error:contains('"+loginError+"')");
         if (loginFailed.length) {
             console.error('Login failed, please check your email address and password');
+            console.log('Login failed, please check your email address and password');
+            console.log('----------- Packt Grab Done --------------');
             return;
         }
 
         request('https://www.packtpub.com' + getBookUrl, function(err, res, body) {
             if (err) {
                 console.error('Request Error');
+                console.log('----------- Packt Grab Done --------------');
                 return;
             }
 
             var $ = cheerio.load(body);
 
-            console.log(bookTitle);
-            console.log('https://www.packtpub.com' + getBookUrl);
+            console.log('Book Title: ' + bookTitle);
+            console.log('Claim URL: https://www.packtpub.com' + getBookUrl);
+            console.log('----------- Packt Grab Done --------------');
         });
     });
 });
