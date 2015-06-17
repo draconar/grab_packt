@@ -17,4 +17,10 @@ After that run the script with the following command:
 Or add it to your crontable:
 
     crontab -e
+    
+For the crontab all paths in **MUST** be absolute. 
+Within the open cron editor window
 
+    0 14 * * * /usr/local/bin/node /Users/<USER_NAME>/<PATH_TO>/grab_packt/server.js >> /tmp/cron_output
+
+_Make sure you have a output file to write to_
