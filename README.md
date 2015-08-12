@@ -22,5 +22,13 @@ For the crontab all paths in **MUST** be absolute.
 Within the open cron editor window
 
     0 14 * * * /usr/local/bin/node /Users/<USER_NAME>/<PATH_TO>/grab_packt/server.js >> /tmp/cron_output
+	
+If you are using Windows, create a run.bat file similar to the following:
+
+	"C:\Program Files\nodejs\node.exe" "C:\Users\<USER_NAME>\Documents\GitHub\grab_packt\server.js" >> "C:\Users\<USER_NAME>\Documents\GitHub\grab_packt\output.txt"
+	
+Then add a scheduled task to execute run.bat daily at noon.	
+
+	schtasks.exe /Create /SC DAILY /TN "Grab Packt Books" /TR "C:\Users\<USER_NAME>\Documents\GitHub\grab_packt\run.bat" /ST 12:00
 
 _Make sure you have a output file to write to_
