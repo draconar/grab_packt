@@ -1,17 +1,26 @@
 Grab a book a day for free from Packt Pub, https://www.packtpub.com/packt/offers/free-learning.
 
+## 1. Install prerequisites
+
 Install this script in the cloned directory using the following command:
 
     npm install
+
+
+## 2. Add credentials
 
 Copy the .env file into place with
 
     cp .env.example .env
 
-And set your email and password.
+Or on Windows:
+
+    copy .env.example .env
+
+And set your packt email and password.
 
 
-## Grab on recurrent basis
+## 3. Grab on recurrent basis
 
 ### Using Node
 After that run the script with the following command:
@@ -30,11 +39,11 @@ Within the open cron editor window
     0 14 * * * /usr/local/bin/node /Users/<USER_NAME>/<PATH_TO>/grab_packt/server.js >> /tmp/cron_output
 
 
-### using Task Scheduler in Windows
+### Using Task Scheduler in Windows
 
-Check out the runt.bat file in the repo. Correct any path if necessary. Try running the script manually to verify that it works as expected. 
+Check the *run.bat* file in the repo. Correct any path if necessary according to your needs. Try running the script manually to verify that it works as expected.
 	
-Then add a scheduled task to execute run.bat by running.	
+Then add a scheduled task to execute run.bat every day by running.	
 
     add_scheduled_task.bat
 
