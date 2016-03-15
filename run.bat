@@ -1,0 +1,1 @@
+"C:\Program Files\nodejs\node.exe" "C:\Users\%UserName%\Documents\GitHub\grab_packt\server.js" >> "C:\Users\%UserName%\Documents\GitHub\grab_packt\output.txt"

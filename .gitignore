@@ -16,3 +16,5 @@ node_modules
 
 # Editors
 .idea
+output.txt
+test
