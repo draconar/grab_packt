@@ -47,3 +47,25 @@ Then add a scheduled task to execute run.bat every day by running.
 
     add_scheduled_task.bat
 
+### OSX Error
+If you get the message:
+`crontab: temp file must be edited in place`
+	
+On a related issue, if you get the message:
+`crontab: temp file must be edited in place`
+
+**Try:**  
+1) Add to `.bash_profile`
+```sh
+alias crontab="VIM_CRONTAB=true crontab"
+```
+2) Add to `.vimrc`
+```vi
+if $VIM_CRONTAB == "true"
+    set nobackup
+    set nowritebackup
+endif
+```
+*note: .bash_profile might be called .profile*  
+*note: .vimrc and .bash_profile are located in the home directory: `~/`*  
+*Reference: http://superuser.com/a/750528*
