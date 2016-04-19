@@ -53,6 +53,8 @@ launchd is recommended over cron for the OSX system.
 This runs on load and from then on every 24 hours (86400 seconds).  
 Just substitute `<username>` for your own.
 
+*by daemon I am referring to the .plist file*
+
 Navigate to directory:
 ```sh
 cd $HOME/Library/LaunchAgents
@@ -119,4 +121,11 @@ Check for errors:
 /tmp/GrabPkt.err
 ```
 Mine is empty due to having no errors.  
+
+In order to test I would:
+- remove the `GrabPkt.out` file
+- unload daemon
+- load daemon
+- check output of `GrabPkt.out` file
+
 *reference: http://alvinalexander.com/mac-os-x/mac-osx-startup-crontab-launchd-jobs*  
