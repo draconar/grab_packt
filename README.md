@@ -108,7 +108,7 @@ Check output of script:
 ```sh
 /tmp/GrabPkt.out
 ```
-It just similar to:
+It should be similar to:
 ```sh
 ----------- Packt Grab Started -----------
 Book Title: Learning Libgdx Game Development
