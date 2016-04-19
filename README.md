@@ -48,10 +48,10 @@ Then add a scheduled task to execute run.bat every day by running.
     add_scheduled_task.bat
 
 ### Using Launchd (OSX)
-launchd is recommend over cron on the OSX system.  
+launchd is recommended over cron for the OSX system.  
 
 This runs on load and from then on every 24 hours (86400 seconds).  
-Just substitute <username> for your own.
+Just substitute `<username>` for your own.
 
 Navigate to directory:
 ```sh
