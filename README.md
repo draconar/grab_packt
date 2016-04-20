@@ -47,3 +47,108 @@ Then add a scheduled task to execute run.bat every day by running.
 
     add_scheduled_task.bat
 
+### OSX Error
+If you get the message:
+`crontab: temp file must be edited in place`
+	
+On a related issue, if you get the message:
+`crontab: temp file must be edited in place`
+
+**Try:**  
+1) Add to `.bash_profile`
+```sh
+alias crontab="VIM_CRONTAB=true crontab"
+```
+2) Add to `.vimrc`
+```vi
+if $VIM_CRONTAB == "true"
+    set nobackup
+    set nowritebackup
+endif
+```
+*note: .bash_profile might be called .profile*  
+*note: .vimrc and .bash_profile are located in the home directory: `~/`*  
+*Reference: http://superuser.com/a/750528*
+
+### Using Launchd (OSX)
+launchd is recommended over cron for the OSX system.  
+
+This runs on load and from then on every 24 hours (86400 seconds).  
+Just substitute `<username>` for your own.
+
+*by daemon I am referring to the .plist file*
+
+Navigate to directory:
+```sh
+cd $HOME/Library/LaunchAgents
+```
+
+Create file:
+```sh
+touch com.<username>.grab_pkt.plist
+```
+
+Edit file:
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.<username>.grab_pkt</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/local/bin/node</string>
+    <string>/Users/<username>/development/misc/grab_packt/server.js</string>
+  </array>
+
+  <key>Nice</key>
+  <integer>1</integer>
+
+  <key>StartInterval</key>
+  <integer>86400</integer>
+
+  <key>RunAtLoad</key>
+  <true/>
+
+  <key>StandardErrorPath</key>
+  <string>/tmp/GrabPkt.err</string>
+
+  <key>StandardOutPath</key>
+  <string>/tmp/GrabPkt.out</string>
+</dict>
+</plist>
+```
+
+Load this daemon into the system:
+```sh
+launchctl load com.<username>.grab_pkt.plist
+```
+*to unload just change load to unload*  
+
+Check output of script:
+```sh
+/tmp/GrabPkt.out
+```
+It should be similar to:
+```sh
+----------- Packt Grab Started -----------
+Book Title: Learning Libgdx Game Development
+Claim URL: https://www.packtpub.com/freelearning-claim/13277/21478
+----------- Packt Grab Done --------------
+```
+
+Check for errors:
+```sh
+/tmp/GrabPkt.err
+```
+Mine is empty due to having no errors.  
+
+In order to test I would:
+- remove the `GrabPkt.out` file
+- unload daemon
+- load daemon
+- check output of `GrabPkt.out` file
+
+*reference: http://alvinalexander.com/mac-os-x/mac-osx-startup-crontab-launchd-jobs*  
