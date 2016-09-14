@@ -38,6 +38,9 @@ Within the open cron editor window
 
     0 14 * * * /usr/local/bin/node /Users/<USER_NAME>/<PATH_TO>/grab_packt/server.js >> /tmp/cron_output
 
+If you are using UTC/BST timezone in your server, you might want to set the crontab as follow:
+
+    25 0 * * * /usr/bin/nodejs /home/user/grab_packt/server.js >> /tmp/cron_output
 
 ### Using Task Scheduler in Windows
 
