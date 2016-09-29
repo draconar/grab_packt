@@ -155,3 +155,40 @@ In order to test I would:
 - check output of `GrabPkt.out` file
 
 *reference: http://alvinalexander.com/mac-os-x/mac-osx-startup-crontab-launchd-jobs*  
+
+### Using in AWS Lambda
+
+1. You need to [sign up](https://portal.aws.amazon.com/gp/aws/developer/registration/index.html) for an AWS account or use an existing one.
+2. After sign in to the **AWS Management Console**, select a region and open the **AWS Lambda console**.
+3. Choose **Get Started Now**.
+![](http://docs.aws.amazon.com/lambda/latest/dg/images/gs-1-10.png)
+  - Note: The console shows the **Get Started Now** page only if you do not have any Lambda functions created. If you have created functions already, you will see the **Lambda** > **Functions** page. On the list page, choose **Create a Lambda function** to go to the **Lambda** > **New function** page.
+4. On the **Select blueprint page**, choose **Skip**.
+5. On the **Configure triggers** page, do the following:
+  1. Choose **CloudWatch Events - Schedule**.
+  2. Enter a rule name in **Rule name**.
+  3. **Schedule expression** select `rate(1 day)`.
+  4. Check **Enable trigger**.
+  5. Choose **Next**.
+6. On the **Configure function** page, do the following:
+  1. Enter a function name in **Name**.
+  2. **Runtime** is `Node.js 4.3` or above.
+  3. **Code entry type** is `Upload a .ZIP file`.
+  4. Zip the source code and **Upload**.
+    - Please make sure to execute `npm install` and configure `.env` before zip the source code.
+  5. In the **Lambda function handler and role** section, do the following:
+    1. **Handler** is `aws-lambda.handler`.
+    2. In **Role**, choose **Create new role from template(s)**.
+    3. In **Role name**, type a name for the role.
+    4. In **Role templates**, you can leave this field blank because your Lambda function already has the basic execution permission it needs.
+  6. In the **Advanced settings** section, do the following:
+    1. In **Memory (MB)**, choose `128`.
+    2. In **Timeout**, enter `0` min `30` sec.
+  7. Choose **Next**.
+7. Choose **Create Function** to create a Lambda function.
+![Imgur](http://i.imgur.com/S3YDeqw.png)
+8. Choose **Test**.
+9. In the **Input test event** page, enter `{}` in the window.
+10. Choose **Save and test**.
+11. Upon successful execution, view results in the console.
+![Imgur](http://i.imgur.com/TV2E1LO.png)
