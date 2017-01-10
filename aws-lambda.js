@@ -30,7 +30,7 @@ exports.handler = function(event, context, callback) {
         }
 
         var $ = cheerio.load(body);
-        getBookUrl = $("a.twelve-days-claim").attr("href");
+        getBookUrl = 'https://www.packtpub.com' + $("a.twelve-days-claim").attr("href");
         bookTitle = $(".dotd-title").text().trim();
         var newFormId = $("input[type='hidden'][id^=form][value^=form]").val();
 
@@ -56,15 +56,15 @@ exports.handler = function(event, context, callback) {
                 return;
             }
 
-            request('https://www.packtpub.com' + getBookUrl, function(err, res, body) {
+            request(getBookUrl, function(err, res, body) {
                 if (err) {
                     callback('Request Error');
                     return;
                 }
 
-                callback(null, {
+                console.log({
                     title: bookTitle,
-                    url: 'https://www.packtpub.com' + getBookUrl,
+                    url: getBookUrl,
                 });
             });
         });
