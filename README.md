@@ -76,8 +76,17 @@ endif
 ### Using Launchd (OSX)
 launchd is recommended over cron for the OSX system.  
 
-This runs on load and from then on every 24 hours (86400 seconds).  
+This runs on load and from then on every 4 hours (14400 seconds).
+
+*You can change it to 24 hours (86400 seconds) if you wish, but I prefer to check more often in case I missed my time slot when my computer was off.*
+*If you run this on a machine that's always running like a server then every 24 hours is okay.*
+
 Just substitute `<username>` for your own.
+
+To view all users (to get your username) run:
+```sh
+dscacheutil -q user | grep -A 3 -B 2 -e uid:\ 5'[0-9][0-9]'
+```
 
 *by daemon I am referring to the .plist file*
 
@@ -106,11 +115,8 @@ Edit file:
     <string>/Users/<username>/development/misc/grab_packt/server.js</string>
   </array>
 
-  <key>Nice</key>
-  <integer>1</integer>
-
   <key>StartInterval</key>
-  <integer>86400</integer>
+  <integer>14400</integer>
 
   <key>RunAtLoad</key>
   <true/>
@@ -126,13 +132,13 @@ Edit file:
 
 Load this daemon into the system:
 ```sh
-launchctl load com.<username>.grab_pkt.plist
+cd $HOME/Library/LaunchAgents && launchctl load com.<username>.grab_pkt.plist
 ```
 *to unload just change load to unload*  
 
 Check output of script:
 ```sh
-/tmp/GrabPkt.out
+sudo cat /tmp/GrabPkt.out
 ```
 It should be similar to:
 ```sh
@@ -144,7 +150,7 @@ Claim URL: https://www.packtpub.com/freelearning-claim/13277/21478
 
 Check for errors:
 ```sh
-/tmp/GrabPkt.err
+sudo cat /tmp/GrabPkt.err
 ```
 Mine is empty due to having no errors.  
 
