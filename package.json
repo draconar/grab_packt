@@ -3,11 +3,22 @@
   "version": "0.0.0",
   "description": "grabbing a book a day",
   "main": "server.js",
+  "scripts": {
+    "heroku": "npm-run-all heroku:*",
+    "heroku:login": "heroku login",
+    "heroku:create-app": "heroku create",
+    "heroku:create-scheduler": "heroku addons:create scheduler:standard",
+    "heroku:open-dashboard": "heroku addons:open scheduler",
+    "heroku:deploy": "git push heroku master"
+  },
   "repository": "",
   "author": "",
   "dependencies": {
     "cheerio": "latest",
     "dotenv": "^1.1.0",
     "request": "latest"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.0.2"
   }
 }

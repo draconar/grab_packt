@@ -192,3 +192,47 @@ In order to test I would:
 10. Choose **Save and test**.
 11. Upon successful execution, view results in the console.
 ![Imgur](http://i.imgur.com/TV2E1LO.png)
+
+### Using in Heroku
+
+The following instructions will set up the node process to run every day at a specific time using [Heroku](https://www.heroku.com/home)
+
+#### Prerequisits
+
+1. You need to [sign up](https://signup.heroku.com/) for an Heroku account or use an existing one.
+2. You will also need to [add a credit card](https://dashboard.heroku.com/account/billing) as the scheduler can't be added without one (100 hours are free per month) but you won't be charged for one run per day.
+
+#### Deploy the app
+
+Install the heroku cli
+
+```shell
+npm install heroku-cli
+```
+
+Create a new app, add a scheduler and deploy the code by running the npm script heroku
+
+```shell
+npm run heroku
+```
+
+* You will be asked for your heroku username and password
+* The scheduler dashboard should open automatically
+
+1. Presss the ```Create job``` button
+2. Set the FREQUENCY to ```Daily```
+3. In the "$" text box write ```node server.js```
+4. Press the ```save``` button
+
+![Imgr](http://i.imgur.com/1Y5s7aQ.gif)
+
+#### Add environment variables
+
+Set the environment variables to give you packt email login and password
+
+Replace ```your-email-here``` and ```your-password-here``` with your own details
+
+```shell
+heroku config:set PACKT_EMAIL=your-email-here
+heroku config:set PACKT_EMAIL=your-password-here
+```
